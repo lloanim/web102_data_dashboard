@@ -71,9 +71,11 @@ function App() {
   return (
 
   <>
-      <div className="title">Explore Pokémons!</div>
-      <div className="description"></div>
-
+      <div className="top-area">
+        <div className="title">Explore Pokemons!</div>
+        <div className="description">Here you can learn more about pokemons displayed on the data dashboard and filter through to find a more specific pokemon!</div>
+      </div>
+      
       <div className="stats-area">
         <StatsCard
           title="Total Pokémons"
@@ -92,27 +94,38 @@ function App() {
 
       </div>
 
-      <div className="search-bar">
-        <input type="text" placeholder="Search Pokemons..." className="search-input" value={query} onChange={(e) => setQuery(e.target.value)}/>
+      <div className="filters">
+
+        <div className="filter-group search-bar">
+          <label className="search-title">Search</label>
+          <input type="text" placeholder="Search Pokemons..." className="search-input" value={query} onChange={(e) => setQuery(e.target.value)}/>
+        </div>
+
+        <div className="filter-group search-drop">
+          <label className="search-title">Type</label>
+          <select value={type} onChange={(e) => setType(e.target.value)}>
+            <option value="all">All Types</option>
+            {allTypes.map((t) => (
+              <option key={t} value={t}>{t}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="filter-group">
+          <label className="search-title">Minimum Experience</label>
+          <input type="number" placeholder="Min Exp" value={minExp}
+            onChange={(e) => setMinExp(e.target.value)} />
+        </div>
+
+        <div className="filter-group">
+          <label className="search-title">Maximum Experience</label>
+          <input type="number" placeholder="Max Exp" value={maxExp}
+            onChange={(e) => setMaxExp(e.target.value)} />
+        </div>
+
       </div>
 
-      <div className="search-drop">
-        <select value={type} onChange={(e) => setType(e.target.value)}>
-          <option value="all">All Types</option>
-          {allTypes.map((t) => (
-            <option key={t} value={t}>{t}</option>
-          ))}
-        </select>
-      </div>
-
-      <div className="range-input">
-        <input type="number" placeholder="Min Exp" value={minExp}
-          onChange={(e) => setMinExp(e.target.value)} />
-        <input type="number" placeholder="Max Exp" value={maxExp}
-          onChange={(e) => setMaxExp(e.target.value)} />
-      </div>
-
-      <div className="dashboard">
+      <div className="dashboard-area">
         <Dashboard pokemon={filtered} />
       </div>
       

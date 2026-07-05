@@ -1,10 +1,10 @@
-# Web Development Project 5 - Data Dashboard
+# Web Development Project 5 - Pokemon Data Dashboard
 
 Submitted by: Lloani Mendez
 
-This web app: **insert description**
+This web app: Has a data dashboard of 20 pokemons with their information of id, name, height, weight, and base experience. Gathered from the pokemon API. You can filter the content displayed on the dashboard with the search bar for the name, dropdown for the type of pokemon, and range number inputs for a minimun or maximum experience. There is also three summary information of the data displayed such as total pokemons displayed, average base experience, and the most common type of pokemon. 
 
-Time spent: 5 hours spent in total
+Time spent: 8 hours spent in total
 
 ## Required Features
 
@@ -42,7 +42,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='./src/walkthrough/walkthrough.gif' title='Video Walkthrough' width='500' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with Kap  
@@ -53,7 +53,7 @@ GIF created with Kap
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Challenge was faced most with designing the format of the actual dashboard
 
 ## License
 
