@@ -1,121 +1,124 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState, useEffect } from 'react';
+import PokemonInfo from './components/pokemonInfo';
+import Dashboard from './components/Dashboard';
+import StatsCard from './components/statsCard';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [list, setList] = useState(null);
+  const [query, setQuery] = useState("");
+  const [type, setType] = useState("all");
+  const [minExp, setMinExp] = useState("");
+  const [maxExp, setMaxExp] = useState("");
+
+  useEffect(() => {
+    const fetchPokemonData = async () => {
+      
+      const response = await fetch(
+        "https://pokeapi.co/api/v2/pokemon?limit=20",
+      );
+      
+      const data = await response.json();
+
+      const details = await Promise.all(
+        data.results.map(async (p) => {
+          const res = await fetch(p.url);
+          return res.json();
+        })
+      );
+
+      console.log(details);
+
+      setList(details);
+    }
+      fetchPokemonData().catch(console.error);
+  }, [])
+
+  const mostCommonPokemon = (pokemons) => {
+    const counts = {};
+
+    for (let i = 0; i < pokemons.length; i++) {
+      const name = pokemons[i].types[0].type.name;
+      counts[name] = (counts[name] || 0) + 1;
+    }
+
+    let topType = "";
+    let topCount = 0;
+
+    for(const name in counts) {
+      if (counts[name] > topCount) {
+        topCount = counts[name];
+        topType = name;
+      }
+    }
+
+    return topType;
+  };
+
+  
+  const allTypes = list ? [...new Set(list.flatMap((p) => p.types.map((t) => t.type.name)))] : [];
+
+  // apply search + type filter together 
+  const filtered = list?.filter((p) => {
+    const matchSearch = p.name.toLowerCase().includes(query.toLowerCase());
+    const matchType = type === "all" || p.types.some((t) => t.type.name === type);
+    const matchMin = minExp === "" || p.base_experience >= Number(minExp);
+    const matchMax = maxExp === "" || p.base_experience <= Number(maxExp);
+    return matchSearch && matchType && matchMin && matchMax;
+  });
+
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
+  <>
+      <div className="title">Explore Pokémons!</div>
+      <div className="description"></div>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      <div className="stats-area">
+        <StatsCard
+          title="Total Pokémons"
+          stat={list?.length ?? 0}
+        />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+        <StatsCard
+          title="Average Base Experience"
+          stat={list? Math.round(list.reduce((sum, p) => sum + p.base_experience, 0) / list.length) : 0}
+        />
+
+        <StatsCard
+          title="Most Common Pokemon Type"
+          stat={list ? mostCommonPokemon(list) : "-"}
+        />
+
+      </div>
+
+      <div className="search-bar">
+        <input type="text" placeholder="Search Pokemons..." className="search-input" value={query} onChange={(e) => setQuery(e.target.value)}/>
+      </div>
+
+      <div className="search-drop">
+        <select value={type} onChange={(e) => setType(e.target.value)}>
+          <option value="all">All Types</option>
+          {allTypes.map((t) => (
+            <option key={t} value={t}>{t}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="range-input">
+        <input type="number" placeholder="Min Exp" value={minExp}
+          onChange={(e) => setMinExp(e.target.value)} />
+        <input type="number" placeholder="Max Exp" value={maxExp}
+          onChange={(e) => setMaxExp(e.target.value)} />
+      </div>
+
+      <div className="dashboard">
+        <Dashboard pokemon={filtered} />
+      </div>
+      
+
+
+  </>
   )
 }
 
