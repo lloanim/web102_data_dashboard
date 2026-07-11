@@ -71,10 +71,6 @@ function App() {
   return (
 
   <>
-      <div className="top-area">
-        <div className="title">Explore Pokemons!</div>
-        <div className="description">Here you can learn more about pokemons displayed on the data dashboard and filter through to find a more specific pokemon!</div>
-      </div>
       
       <div className="stats-area">
         <StatsCard

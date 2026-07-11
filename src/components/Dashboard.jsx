@@ -16,7 +16,7 @@ const Dashboard = ({ pokemon }) => {
             </div>
 
             {pokemon.map((p) => (
-                <Link to={`/PokemonDetail/${p.id}`} key={p.id}>
+                <Link className="dashboard-link" to={`/PokemonDetail/${p.id}`} key={p.id}>
                     <PokemonInfo
                         key={p.id}
                         id={p.id}

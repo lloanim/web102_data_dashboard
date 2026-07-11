@@ -1,10 +1,22 @@
-import { Link } from "react-router"
+import { Outlet, Link } from "react-router"
 
 function NavBar() {
     return (
-        <nav>
-            <Link to="/">Home</Link>
-            <Link to="/dashboard">Dashboard</Link>
-        </nav>
+        <div className="layout">
+            <aside className="sidebar">
+                <div className="title">Pokemon Explore</div>
+
+                <nav className="nav-bar">
+                    <Link to="/">Home</Link>
+                </nav>
+            </aside>
+            
+            <main className="content">
+                <Outlet />
+            </main>
+            
+        </div>
     )
 }
+
+export default NavBar

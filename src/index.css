@@ -1,12 +1,40 @@
-.top-area{
-  background-color: #3B4CCA;
-  height: 8rem;
+/*--- Side Bar ---*/
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  background-color: #3B4CCA; 
+  color: white;
+  padding: 24px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f5f7fa;
+}
+
+.sidebar nav {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 0 2rem;
-  box-shadow: 0 4px 10px rgba(115, 182, 233, 0.15);
+  gap: 16px;
+  margin-top: 30px;
 }
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+
+
+
 
 .title {
   font-family: "Fredoka", sans-serif;
@@ -56,6 +84,7 @@
   margin-bottom: 12px;
   justify-content: center;
   margin: 15px;
+  text-transform:capitalize;
 }
 
 .stat {
@@ -125,6 +154,7 @@
   width: 100%;
   padding: 24px 0 60px;
   box-sizing: border-box;
+  
 }
 
 .dashboard {
@@ -136,6 +166,8 @@
   border: 1px solid #d6e4f5;
   box-shadow: 0 6px 20px rgba(59, 76, 202, 0.12);
   overflow: hidden;
+  text-transform:capitalize;
+  
 }
 
 .row {
@@ -148,6 +180,7 @@
   font-size: 0.95rem;
   color: #1E2A78;
   transition: background-color 0.15s ease;
+  
 }
 
 .header-row {
@@ -160,6 +193,7 @@
   letter-spacing: 0.05em;
   position: sticky;
   top: 0;
+  
 }
 
 .item {
@@ -168,4 +202,97 @@
 
 .header-row .item-name {
   padding-left: 50px;
+  
 }
+
+
+/*--- Pokemon Detail Section ---*/
+
+.box{
+  background:#A8D8FF;
+  border-radius:20px;
+  padding:30px;
+  border:2px solid #3B4CCA;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.section{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 30px
+}
+
+.section-one {
+  flex: 1;
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+}
+
+.detail-img{
+  width: 320px;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+}
+
+.detail-name{
+  font-family:"Fredoka",sans-serif;
+  font-size:42px;
+  font-weight:600;
+  color:#3B4CCA;
+  text-transform:capitalize;
+  margin-bottom:20px;
+}
+
+.stats-name{
+  font-family:"Fredoka",sans-serif;
+  font-size: 30px;
+  font-weight:500;
+  color:#3B4CCA;
+}
+
+.detail-stats{
+  display: grid;
+  grid-template-columns: repeat(3, 19em);
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.stats-card{
+  width: 250px;
+  min-height: 100px;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  display: grid;
+  border: 1px solid #4A90E2;
+}
+
+.stats-card:hover{
+  cursor: pointer;
+  box-shadow: 0 5px 15px #4A90E2;
+}
+
+.basic-info{
+  font-family:"Nunito",sans-serif;
+  font-size:18px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  text-transform:capitalize;
+}
+
+.dashboard-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
