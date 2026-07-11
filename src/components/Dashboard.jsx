@@ -1,4 +1,5 @@
 import PokemonInfo from "./pokemonInfo"
+import { Link } from "react-router"
 
 const Dashboard = ({ pokemon }) => {
     if (!pokemon || pokemon.length === 0)
@@ -15,14 +16,16 @@ const Dashboard = ({ pokemon }) => {
             </div>
 
             {pokemon.map((p) => (
-                <PokemonInfo
-                    key={p.id}
-                    id={p.id}
-                    name={p.name}
-                    height={p.height}
-                    weight={p.weight}
-                    base_experience={p.base_experience}
-                />
+                <Link to={`/PokemonDetail/${p.id}`} key={p.id}>
+                    <PokemonInfo
+                        key={p.id}
+                        id={p.id}
+                        name={p.name}
+                        height={p.height}
+                        weight={p.weight}
+                        base_experience={p.base_experience}
+                    />
+                </Link>
             ))}
         </div>
     )
