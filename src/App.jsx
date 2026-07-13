@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import PokemonInfo from './components/pokemonInfo';
 import Dashboard from './components/Dashboard';
 import StatsCard from './components/statsCard';
+import DashboardChartOne from './components/DashboardChartOne';
+import DashboardChartTwo from "./components/DashboardChartTwo";
 import './App.css';
 
 function App() {
@@ -57,8 +59,7 @@ function App() {
 
   
   const allTypes = list ? [...new Set(list.flatMap((p) => p.types.map((t) => t.type.name)))] : [];
-
-  // apply search + type filter together 
+ 
   const filtered = list?.filter((p) => {
     const matchSearch = p.name.toLowerCase().includes(query.toLowerCase());
     const matchType = type === "all" || p.types.some((t) => t.type.name === type);
@@ -84,7 +85,7 @@ function App() {
         />
 
         <StatsCard
-          title="Most Common Pokemon Type"
+          title="Most Common Pokémon Type"
           stat={list ? mostCommonPokemon(list) : "-"}
         />
 
@@ -123,8 +124,14 @@ function App() {
 
       <div className="dashboard-area">
         <Dashboard pokemon={filtered} />
+
+        <div className="dashboard-charts">
+          <div className="chart-title">Charts</div>
+          <DashboardChartOne pokemon={filtered} />
+         
+          <DashboardChartTwo pokemon={list} />
+        </div>
       </div>
-      
 
 
   </>

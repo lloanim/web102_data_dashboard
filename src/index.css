@@ -1,14 +1,15 @@
-/*--- Side Bar ---*/
+
 .layout {
   display: flex;
   min-height: 100vh;
 }
 
 .sidebar {
-  width: 240px;
+  width: 190px;
   background-color: #3B4CCA; 
   color: white;
   padding: 24px;
+  flex-shrink: 0;
 }
 
 .content {
@@ -22,9 +23,13 @@
   flex-direction: column;
   gap: 16px;
   margin-top: 30px;
+  width: 100%;
 }
 
 .sidebar a {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
   color: white;
   text-decoration: none;
   font-size: 18px;
@@ -32,6 +37,9 @@
   border-radius: 8px;
 }
 
+.sidebar a:hover {
+  color: #FFDE00;
+}
 
 
 
@@ -72,8 +80,8 @@
 }
 
 .card:hover{
-    cursor: pointer;
-    box-shadow: 0 5px 15px #4A90E2;
+  cursor: pointer;
+  box-shadow: 0 5px 15px #4A90E2;
 }
 
 .card-title {
@@ -151,10 +159,12 @@
 }
 
 .dashboard-area {
+  display: flex;
+  gap: 15px;
   width: 100%;
   padding: 24px 0 60px;
   box-sizing: border-box;
-  
+  align-items: flex-start;
 }
 
 .dashboard {
@@ -204,9 +214,6 @@
   padding-left: 50px;
   
 }
-
-
-/*--- Pokemon Detail Section ---*/
 
 .box{
   background:#A8D8FF;
@@ -296,3 +303,80 @@
   color: inherit;
 }
 
+.dashboard-link:hover{
+  background-color: #D6E4F5;
+}
+
+.chart-card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  margin: 30px 0;
+}
+
+.chart-card h2 {
+  color: #3B4CCA;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.dashboard-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.chart-title{
+  font-family: "Fredoka", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #3B4CCA;
+}
+
+.about {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.description{
+  
+  background: #3B4CCA;
+  border: 1px solid #d6e4f5;
+  border-radius: 15px;
+
+  width: 70%;
+  max-width: 800px;
+
+  padding: 30px;
+  text-align: center;
+
+  box-shadow: 0 6px 20px rgba(59, 76, 202, 0.15);
+
+  font-family: "Nunito", sans-serif;
+  color: white;
+  font-size: 1.2rem;
+  
+}
+
+.about-title{
+  font-family: "Fredoka", sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #3B4CCA;
+  margin-bottom: 20px;
+}
+
+.chart-desc {
+  font-family: "Nunito", sans-serif;
+  color: #1E2A78;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 8px;
+  text-align: center;
+}

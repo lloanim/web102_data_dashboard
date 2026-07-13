@@ -1,13 +1,15 @@
 import { Outlet, Link } from "react-router"
 
+
 function NavBar() {
     return (
         <div className="layout">
             <aside className="sidebar">
-                <div className="title">Pokemon Explore</div>
+                <div className="title">Pokémon Explore</div>
 
                 <nav className="nav-bar">
-                    <Link to="/">Home</Link>
+                    <Link to="/">Dashboard</Link>
+                    <Link to="/About">About</Link>
                 </nav>
             </aside>
             
